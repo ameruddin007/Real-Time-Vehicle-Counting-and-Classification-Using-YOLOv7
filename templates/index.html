@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Helmet Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@400;700&family=Fauna+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fauna One', serif;
+            background-color: #f4e9d8;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d6c8a5' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #3c2f2f;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #fff9eb;
+            padding: 30px;
+            border: 1px solid #d6c8a5;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #5a3825;
+            text-align: center;
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d6c8a5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-style: italic;
+            color: #7a5c3c;
+            margin-top: -10px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background: #f8f3e6;
+            padding: 25px;
+            border: 1px solid #d6c8a5;
+            border-radius: 4px;
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #d6c8a5;
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 8px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #5a3825;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+            width: 100%;
+            font-family: 'Fauna One', serif;
+            padding: 8px;
+            border: 1px solid #d6c8a5;
+            border-radius: 3px;
+            background: #fff;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #8a6d3b;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px 0;
+            margin-top: 20px;
+            background: #8a6d3b;
+            border: 1px solid #7a5c3c;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: #fff9eb;
+            cursor: pointer;
+            transition: background 0.3s;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #7a5c3c;
+        }
+
+        a.gallery-link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            color: #8a6d3b;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            padding: 10px;
+            border: 1px solid #d6c8a5;
+            border-radius: 4px;
+            background: #f8f3e6;
+        }
+
+        a.gallery-link:hover {
+            color: #5a3825;
+            background: #f4e9d8;
+            text-decoration: none;
+        }
+
+        .output {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background: #f8f3e6;
+            border: 1px solid #d6c8a5;
+            border-radius: 4px;
+        }
+
+        .output h2 {
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: #5a3825;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d6c8a5;
+        }
+
+        .output img, .output video {
+            max-width: 90%;
+            border: 1px solid #d6c8a5;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .ornament {
+            text-align: center;
+            font-size: 24px;
+            color: #8a6d3b;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Object Detection System</h1>
+        <p class="subtitle"></p>
+        
+        <div class="ornament">⚔️</div>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-section">
+                <label>Select Input Type:</label>
+                
+                <div class="radio-group">
+                    <input type="radio" id="image" name="option" value="image" required>
+                    <label for="image" style="display: inline;">Image</label>
+                </div>
+                <input type="file" name="file" accept="image/*">
+                
+                <!-- <div class="radio-group">
+                    <input type="radio" id="video" name="option" value="video" required>
+                    <label for="video" style="display: inline;">Video</label>
+                </div>
+                <input type="file" name="file" accept="video/*"> -->
+                
+                <div class="radio-group">
+                    <input type="radio" id="webcam" name="option" value="webcam" required>
+                    <label for="webcam" style="display: inline;">Webcam</label>
+                </div>
+            </div>
+
+            <button type="submit">Execute Detection</button>
+        </form>
+
+        <a href="{{ url_for('gallery') }}" class="gallery-link">View Detection Gallery</a>
+
+        {% if output_file %}
+        <div class="output">
+            <h2>Detection Result:</h2>
+            {% if output_file.endswith('.jpg') %}
+                <img src="{{ url_for('static', filename='outputs/' + output_file) }}">
+            {% else %}
+                <video controls>
+                    <source src="{{ url_for('static', filename='outputs/' + output_file) }}" type="video/mp4">
+                </video>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
